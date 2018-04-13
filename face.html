@@ -1,0 +1,182 @@
+<!doctype html>
+<html>
+<head>
+<title>Face</title>
+	<style>
+		body{
+			margin: 0 auto;
+			background-color: #000000;
+		}
+
+		#faceContainer {
+		 	position:absolute;
+			width:620px;
+		 	height:520px;
+			background-color: #030303;
+			top:10%;
+			left:30%;
+			z-index: 0;
+		}
+		
+		#videoContainer {
+			position: relative;
+			width: 300px; 
+			height: 250px;
+			top: -2%;
+			left: 24%;
+		}
+		#videoBlock {
+			width: 100%; 
+			height: 100%;  
+			display: flex; 
+			justify-content: center; 
+			align-items: center;
+			z-index: 50;
+		}
+		
+		#curtain{
+			position: absolute;
+			width: 100%; 
+			height: 100%; 
+			background-color: #000000;
+			z-index: 70;
+		}
+		
+		#videoCover {
+			position: absolute;
+			width: 300px;
+			height: 250px;
+			background-image: url(images/lips1.gif);
+			background-size: 300px 250px;
+			z-index: 101;
+		}
+		
+
+		.eye{
+			position: relative;
+			width: 184px;
+			height: 120px;
+		}
+		.left{
+			top: 10%;
+			left: 10%;
+			background-image: url(images/lefteye_1.gif);
+			background-size: 184px 120px;
+		}		
+		.right{
+			top: -12.4%;
+			left: 60%;
+			background-image: url(images/reye1.gif);
+			background-size: 184px 120px;
+		}
+		
+		.left:hover{
+			background-image: url(images/leyehalf.png);			
+		}
+		.left:active{
+			background-image: url(images/leyeclose.png);			
+		}
+		.right:hover{
+			background-image: url(images/reyehalf.png);
+			background-size: 215px 120px;
+		}
+		.right:active{
+			background-image: url(images/reyeclose.png);
+			background-size: 180px 120px;
+		}
+		#videoCover:hover{
+			background-image: url(images/t.png);
+			background-size: 250px 150px;
+			height: 150px;
+			width: 250px;
+		}
+		#videoCover:active{
+			background-image: url(images/l.png);
+			background-size: 250px 150px;
+			height:150px;
+			width: 250px;
+		}
+
+	</style>
+</head>
+
+<body>
+	
+
+	<div id = "faceContainer"> 
+
+		<div class="eye left" onclick="startPlay(perc)">
+		</div>
+		<div class="eye right" onclick="startPlay(synth)">
+		</div>
+		<div class="mouth" onclick="startPlay(voice)">
+		</div>
+		
+		
+		<div id="videoContainer"> 
+			<div id="videoBlock">   
+				<video 
+					   preload="preload"
+					   width="250px" height="200px" muted="true"
+					   id="video" autoplay="autoplay" loop="loop" 
+					   src="images/whatigot2.mp4" type="video/mp4">
+				</video> 
+				<div id="curtain">
+				</div>
+				
+				<div id="videoCover" onclick="startPlay(voice); hideLips();">
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<script>
+		
+		var isHidden = false;
+		
+		document.getElementById("video").mediaGroup="song";
+		
+		var perc = new Audio('sounds/bitcrushPERC.mp3');
+			perc.loop = true;
+			perc.autoplay=true;		
+			perc.muted=true;
+			perc.mediaGroup="song";
+		
+		var synth = new Audio('sounds/bitcrushSYNTH.mp3');	
+			synth.loop = true;
+			synth.autoplay=true;
+			synth.muted=true;
+			synth.mediaGroup="song";
+
+		
+		var voice = new Audio('sounds/bitcrushVOICE.mp3');	
+			voice.loop = true;
+			voice.autoplay=true;
+			voice.muted=true;
+			voice.mediaGroup="song";
+				
+		function hideLips(){
+			if(isHidden==false){
+				document.getElementById('videoCover').style.opacity="0.0";
+				document.getElementById('curtain').style.opacity="0.0";
+				isHidden = true;
+			}else{
+				document.getElementById('videoCover').style.opacity="1.0";
+				document.getElementById('curtain').style.opacity="1.0";
+				isHidden = false;
+			}
+		}
+		
+		function startPlay(i){
+			if(i.muted == false){
+				i.muted = true;
+			} else {
+				i.muted = false;
+			}
+		}
+		
+	
+	</script>
+</body>
+</html>
